@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="enteredNumber" placeholder="Введіть двоцифрове число" max="99" min="10" required>
+    <input type="button" id="enterBtn" value="Ввести">
+    <div id="result"></div>
+
+    <script>
+        /* 1. Написати функцію, яка приймає двоцифрове число і повертає його в текстовому вигляді. 
+        Наприклад: 35 – тридцять п'ять, 89 – вісімдесят дев'ять, 12 – дванадцять.*/
+
+        let btn = document.getElementById('enterBtn');
+        let res = document.querySelector('#result');
+
+        btn.onclick = function() {
+            let numb = document.getElementById('enteredNumber').value;
+            let numbers = numb.split('');
+
+            let first = ['один', 'два', 'три', 'чотири', 'п\u02BCять', 'шість', 'сім', 'вісім', 'дев\u02BCять'];
+            let second = ['одиннадцять', 'дванадцять', 'тринадцять', 'чотирнадцять', 'п\u02BCятнадцять', 'шістнадцять', 'сімнадцять', 'вісімнадцять', 'дев\u02BCятнадцять'];
+            let third = ['десять', 'двадцять', 'тридцять', 'сорок', 'п\u02BCятдесят', 'шістдесят', 'сімдесят', 'вісімдесят', 'дев\u02BCяносто'];
+
+            if (numb > 10 && numb < 20 && numb % 10 !== 0) {
+                res.innerHTML = `${second[numb - 11]}`;
+            }if(numb >= 10 && numb <=99 && numb % 10 == 0 ){
+                res.innerHTML = `${third[numbers[0] - 1]}`
+            }if (numb >= 20 && numb <=99 && numb % 10 !== 0 ){
+                res.innerHTML = `${third[numbers[0] - 1]} ${first[numbers[1] - 1]}`;
+            }
+        }
+    </script>
+</body>
+</html>

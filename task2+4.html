@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Типу магазин</title>
+    <style>
+        *{
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+        #backResult{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0, 0.5);
+            top: 0%;
+            left: 0%;
+        }
+        #result{
+            background-color: white;
+            text-align: center;
+            margin: 5%;
+            padding: 2%;
+            min-height: 20%;
+            min-width: 20%;
+            border: solid 1px rgb(255, 175, 0);
+            box-shadow: 3px 3px 3px 3px rgb(255, 175, 0, 0.5);
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            text-align: center;
+            display: inline-block;
+            min-height: 10%;
+            min-width: 15%;
+            padding: 0.5%;
+            margin: 1%;
+            border: solid 1px rgb(255, 175, 0);
+        }
+        li:hover{
+            box-shadow: 3px 3px 3px 3px rgb(255, 175, 0, 0.5);
+        }
+        input{
+            border: solid 1px rgb(255, 175, 0);
+            padding: 1%;
+            margin: 2%;
+            background-color: white;
+        }
+        .plusBtn{
+            padding: 2% 5%;
+        }
+        .minusBtn{
+            padding: 2% 6%;
+        }
+        #centeredBtn{
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <ul id = "productList">
+        <li>
+            <img src = "https://i.pinimg.com/originals/5f/0d/f7/5f0df7a242b8f3d7795db84d5ceb7f13.png" style = "height: 50px;">
+            <h3 class="titleOfItem">Банан</h3>
+            <p><span class = "priceOfItem">10</span> грн/шт.</p>
+            <input type = "button" class = "plusBtn" value = "+">
+            <input type = "button" class = "minusBtn" value = "-">
+            <p><span class="numberOfItem">0</span> шт.</p>
+        </li>
+        <li>
+            <img src = "https://pngimg.com/uploads/orange/orange_PNG789.png" style = "height: 50px;">
+            <h3 class="titleOfItem">Апельсин</h3>
+            <p><span class = "priceOfItem">7</span> грн/шт.</p>
+            <input type = "button" class = "plusBtn" value = "+">
+            <input type = "button" class = "minusBtn" value = "-">
+            <p><span class="numberOfItem">0</span> шт.</p>
+        </li>
+        <li>
+            <img src = "https://www.pngall.com/wp-content/uploads/2016/04/Carrot-PNG.png" style = "height: 50px;">
+            <h3 class="titleOfItem">Морква</h3>
+            <p><span class = "priceOfItem">3</span> грн/шт.</p>
+            <input type = "button" class = "plusBtn" value = "+">
+            <input type = "button" class = "minusBtn" value = "-">
+            <p><span class="numberOfItem">0</span> шт.</p>
+        </li>
+        <li>
+            <img src = "https://free-png.ru/wp-content/uploads/2022/02/free-png.ru-407-340x340.png" style = "height: 50px;">
+            <h3 class="titleOfItem">Помідор</h3>
+            <p><span class = "priceOfItem">6</span> грн/шт.</p>
+            <input type = "button" class = "plusBtn" value = "+">
+            <input type = "button" class = "minusBtn" value = "-">
+            <p><span class="numberOfItem">0</span> шт.</p>
+        </li>
+        <li>
+            <img src = "http://pngimg.com/uploads/watermelon/watermelon_PNG2639.png" style = "height: 50px;">
+            <h3 class="titleOfItem">Кавун</h3>
+            <p><span class = "priceOfItem">150</span> грн/шт.</p>
+            <input type = "button" class = "plusBtn" value = "+">
+            <input type = "button" class = "minusBtn" value = "-">
+            <p><span class="numberOfItem">0</span> шт.</p>
+        </li>
+    </ul>
+
+    <div id = "centeredBtn"><input type = "button" id = "calculate" value = "Розрахувати"></div>
+
+    <div id = "backResult" style = "display: none;">
+        <div id = "result" style = "display: none;">
+            <div id = "showReceipt"></div>
+            <div id = "showSum"></div>
+            <input type = "button" id = "exitBtn" value = "Закрити">
+        </div>    
+    </div>
+
+    <script>
+        /* 2. "Створити html-сторінку з клікером. 
+        - При кліку на кнопку ""Додати"" рахунок додається на 1
+        - При кліку на кнопку ""Відняти"" рахунок віднімається на 1"*/
+
+        /* 4. Створити html-сторінку з кнопкою **Відкрити** та модальним вікном. 
+        На модальному вікні має бути текст та кнопка **Закрити**. 
+        Спочатку модальне вікно не відображається. 
+        При натисканні на кнопку **Відкрити** з'являється модальне вікно, на кнопку **Закрити** – зникає.*/
+
+    let res = document.querySelector("#result");
+    let backRes = document.querySelector("#backResult");
+    let receiptPlace = document.querySelector("#showReceipt");
+    let sumPlace = document.querySelector("#showSum");
+    let cal = document.getElementById('calculate');
+    let exit = document.getElementById('exitBtn');
+
+    let plus = document.querySelectorAll('.plusBtn');
+    let minus = document.querySelectorAll('.minusBtn');
+
+    let titlesArr = document.querySelectorAll('.titleOfItem');
+    let pricesArr = document.querySelectorAll('.priceOfItem');
+    let numbers = document.querySelectorAll('.numberOfItem');
+
+    let titles = [];
+    for(let i = 0; i < titlesArr.length; i++){
+        titles[i] = titlesArr[i].innerText;
+    }
+
+    let prices = [];
+    for(let i = 0; i < pricesArr.length; i++){
+        prices[i] = pricesArr[i].innerText;
+    }
+
+    let nums = [0, 0, 0, 0, 0];
+    let preReceipt = '';
+
+
+        for (let i = 0; i < plus.length; i++){
+            plus[i].onclick = function(){
+                nums[i]++; 
+                numbers[i].innerHTML = nums[i];
+                console.log(prices[i]);
+            }}
+
+        for (let i = 0; i < minus.length; i++){
+            minus[i].onclick = function(){
+                    if(nums[i] > 0){
+                        nums[i]--; 
+                        numbers[i].innerHTML = nums[i];
+            }}}
+
+    function receipt(){
+        for (let i = 0; i < titles.length; i++){
+            if(nums[i] !== 0){
+            preReceipt += `<br>${titles[i]} - ${prices[i]} грн/шт. - ${nums[i]} шт.`;
+            }
+        }
+        receiptPlace.innerHTML += preReceipt;
+    }
+
+    function sum(){
+        let sumOfPrices = 0;
+        let preSum = 0;
+        for (let i = 0; i < titles.length; i++){
+            preSum += (prices[i] * nums[i]);
+        }
+        sumOfPrices += preSum;
+        sumPlace.innerHTML = `<b>Загальна сума - ${sumOfPrices} грн</b>`;
+    }
+
+    cal.onclick = function(){
+        if(res.style.display == "none" && backRes.style.display == "none"){
+            res.style.display = "block";
+            backRes.style.display = "block";
+        }
+        receipt();
+        sum();
+
+        exit.onclick = function(){
+            if(res.style.display == "block" && backRes.style.display == "block"){
+                preReceipt = '';
+                receiptPlace.innerHTML = '';
+                res.style.display = "none";
+                backRes.style.display = "none";
+            }
+        }
+    }
+
+    </script>
+</body>
+</html>
