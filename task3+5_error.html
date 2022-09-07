@@ -45,6 +45,8 @@
                 clocker.innerHTML = hours + ':' + minutes + ':' + seconds + "</br>" + days + '.' + months + '.' + years + "</br>" + daysOfWeek[dayWeek - 1];
                 
                 setTimeout(() => clocker.style.color = "red", 100000);
+                // setTimeout(() => clocker.innerHTML += `<br>Заповнення<br>завершено`, 100000);
+
         }
 
         function r(min, max){
@@ -58,11 +60,11 @@
         function rColor(){
             return `rgb(${ran(0, 254)},${ran(0, 255)},${ran(0, 255)})`;
         }
+        
+        let tops = [''];
+        let lefts = [''];
 
         setInterval(function(){
-            let tops = [''];
-            let lefts = [''];
-
             let t = r(0, 590);
             let l = r(0, 590);
             for(let i = 0; i < tops.length; i++){
@@ -79,7 +81,8 @@
                     let div = `<div style="${styles}"></div>`;
                     document.body.insertAdjacentHTML('beforeend', div);
 
-                    console.log(t, l);
+                    console.log(tops);
+                    break;
                 }else{
                     continue;
                 }
