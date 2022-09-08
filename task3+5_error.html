@@ -64,7 +64,7 @@
         let tops = [''];
         let lefts = [''];
 
-        setInterval(function(){
+        setInterval(function(){   //все одно чогось додає квадрат там, де він вже був
             let t = r(0, 590);
             let l = r(0, 590);
             for(let i = 0; i < tops.length; i++){
@@ -89,6 +89,30 @@
             }
             timer();
         }, 1000);
+        
+        // function generator(){   //додає квадрати в унікальні місця, але не встигає згенерувати унікальні координати за секунду, просто пачками показує console.log('Такі значення вже є')
+        //     let t = r(0, 590);
+        //     let l = r(0, 590);
+        //         if(tops.includes(t) && lefts.includes(l)){
+        //             console.log('Такі значення вже є');
+        //         }else{
+        //             tops.push(t);
+        //             lefts.push(l);
+
+        //             let styles = `position: absolute;
+        //                 width : 60px; 
+        //                 height : 60px;
+        //                 top : ${t}px; 
+        //                 left : ${l}px;
+        //                 background-color: ${rColor()};`;
+        //             let div = `<div style="${styles}"></div>`;
+        //             document.body.insertAdjacentHTML('beforeend', div);
+
+        //             console.log(t, l);
+        //         }
+        //     timer();
+        // }
+        // setInterval(generator, 1000);
     </script>
 </body>
 </html>
